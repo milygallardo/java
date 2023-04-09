@@ -3,10 +3,18 @@
  */
 package com.mycompany.proyectoprueba;
 
+import com.mycompany.proyectoprueba.claseperro.Perro;
+import com.mycompany.proyectoprueba.mamifero.Canino;
+import com.mycompany.proyectoprueba.mamifero.Interface;
+import com.mycompany.proyectoprueba.mamifero.Mamifero;
+import com.mycompany.proyectoprueba.mamifero.Prueba;
+import com.mycompany.proyectoprueba.mamifero.PruebaInterface;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -15,58 +23,94 @@ import java.util.Scanner;
  */
 public class ProyectoPrueba {
 
+    private static Interface it = new PruebaInterface();
+
     public static void main(String[] args) throws IOException {
 //        System.out.println("Hello World!\t\"Charly\"\nObi");
 //    }//\" puedo poner comillas dentro del string
 //    // \n pone enter dentro del string
 //    // \t pone tabulación dentro del string  
-        Scanner sc = new Scanner(System.in);
 
-        Path pruebatxt = Paths.get("C:\\Users\\Diego\\Downloads\\Java\\prubea\\prueba.txt");
-        int contador = 0;
-        String entrada = "";
-        System.out.println("¿Qué palabra querés buscar?");
-        entrada = sc.next();
+        System.out.println(it.crearCanino().toString());
 
-        for (String linea : Files.readAllLines(pruebatxt)) {
-            if (linea.toLowerCase().contains(entrada.toLowerCase())) {
-                System.out.println("Está");
-                contador++;
-            }
-        }
+        Mamifero perro = new Canino("nombre", "color", "dieta");
+        perro.accionMamifera();
         
-        System.out.println();
+        ejemploHash();
 
-        for (String linea : Files.readAllLines(pruebatxt)) {
-            System.out.println(linea);
-        }
-
-        int input;
-        System.out.println("Ingrese el tamaño del array \"perros\" ");
-        input = sc.nextInt();
-        String perros[] = new String[input];
-        for (int i = 0; i < perros.length; i++) {
-            System.out.println("En el especio " + i + "i");
-            perros[i] = sc.next();
-        }
-        listar(perros);
-        System.out.println(saludar());
-        crearArray();
-
+//        Perro[] listaPerros = new Perro[6];
+//
+//        Perro perro2 = new Perro("Obi", "Mediano", "Mestizo", 1);
+//        // creacion de objeto
+////        System.out.println(perro2);
+////        System.out.println(perro2.getRaza());
+////        perro2.setEdad(2);
+////        System.out.println(perro2.toString());
+////        System.out.println(perro2.getEdad());
+//        Perro perro3 = crearPerro();
+//        System.out.println(perro3.toString());
+//        Perro perro4 = crearPerro();
+//        System.out.println(perro4.toString());
+//    }
+//
+//    public static Perro crearPerro() {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Ingrese el nombre del perro");
+//        String Nombre = sc.next();
+//        System.out.println("Ingrese el tamaño del perro");
+//        String Tamaño = sc.next();
+//        System.out.println("Ingrese la raza del perro");
+//        String Raza = sc.next();
+//        System.out.println("Ingrese la edad del perro");
+//        int Edad = sc.nextInt();
+//        return new Perro(Nombre, Tamaño, Raza, Edad);
+//    }
     }
 
-    static String saludar() {
-        return "hola";
-    }
+    public static void ejemploHash() {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Prueba> perros = new ArrayList();
+        HashMap<Integer, String> varios = new HashMap<>();
 
-    private static String listar(String[] entrada) {
-        for (String palabra : entrada) {
-            System.out.println(palabra);
+        boolean cond = true;
+        String input = "";
+
+        do {
+            System.out.println("¿Quiere agregar un perro a la coleccion?");
+            System.out.println("1- SI");
+            System.out.println("2- NO");
+            input = sc.next();
+
+            switch (input) {
+                case "1":
+                    perros.add(crearPrueba());
+                    break;
+                case "2":
+                    System.out.println("Coleccion creada");
+                    cond = false;
+                    break;
+                default:
+                    System.out.println("Valor ingreasdo no coincide");
+                    throw new AssertionError();
+            }
+        } while (cond == true);
+        for (Prueba perro : perros) {
+            System.out.println(perro);
+            varios.putIfAbsent(perro.getValor(), perro.getNombre());
         }
-        return null;
+        System.out.println(varios);
+        System.out.println(perros.get(0));
+        System.out.println(varios.keySet());
     }
 
-    static String crearArray() {
-        return null;
+    public static Prueba crearPrueba() {
+        Scanner sc = new Scanner(System.in);
+        Prueba prueba = new Prueba();
+        System.out.println("Ingrese el nombre");
+        prueba.setNombre(sc.next());
+        System.out.println("Ingrese el valor");
+        prueba.setValor(sc.nextInt());
+
+        return prueba;
     }
 }

@@ -3,13 +3,19 @@
  */
 package com.mycompany.getstarted;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 /**
  *
  * @author Diego
  */
 public class Getstarted {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //int myNum = 15;
 //myNum = 20;  // myNum is now 20
 //System.out.println(myNum);
@@ -41,5 +47,63 @@ public class Getstarted {
         }
         int numeross[] = new int[]{1,37,16};
         System.out.println(numeross[2]);
+        
+         Scanner sc = new Scanner(System.in);
+
+    Path pruebatxt = Paths.get("C:\\Users\\Diego\\Downloads\\Java\\prubea\\prueba.txt");
+    int contador = 0;
+    String entrada = "";
+
+    System.out.println ("¿Qué palabra querés buscar?");
+        entrada  = sc.next();
+
+    for (String linea: Files.readAllLines (pruebatxt) 
+        ) {
+            if (linea.toLowerCase().contains(entrada.toLowerCase())) {
+            System.out.println("Está");
+            contador++;
+        }
     }
+
+    System.out.println ();
+
+    for (String linea: Files.readAllLines (pruebatxt) 
+        ) {
+            System.out.println(linea);
+    }
+
+    int input;
+
+    System.out.println ("Ingrese el tamaño del array \"perros\" ");
+        input  = sc.nextInt();
+    String perros[] = new String[input];
+    for (int i = 0;i< perros.length ;i++) {
+            System.out.println("En el especio " + i + "i");
+        perros[i] = sc.next();
+    }
+
+    listar(perros);
+
+    System.out.println (saludar
+
+    ());
+    crearArray();
+
 }
+
+static String saludar() {
+        return "hola";
+    }
+
+    private static String listar(String[] entrada) {
+        for (String palabra : entrada) {
+            System.out.println(palabra);
+        }
+        return null;
+    }
+
+    static String crearArray() {
+        return null;
+    }        
+    }
+
