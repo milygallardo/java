@@ -84,9 +84,7 @@ public class Getstarted {
 
     listar(perros);
 
-    System.out.println (saludar
-
-    ());
+    System.out.println (saludar());
     crearArray();
 
 }

@@ -82,7 +82,7 @@ public class ProyectoPrueba {
             input = sc.next();
 
             switch (input) {
-                case "1":
+                case "1": // mientras yo le ponga 1, agrega perros al arraylist
                     perros.add(crearPrueba());
                     break;
                 case "2":
@@ -94,12 +94,19 @@ public class ProyectoPrueba {
                     throw new AssertionError();
             }
         } while (cond == true);
-        for (Prueba perro : perros) {
+        
+        System.out.println("ARRAYLIST");
+        
+        for (Prueba perro : perros) { // recorro arraylist lugarxlugar
             System.out.println(perro);
             varios.putIfAbsent(perro.getValor(), perro.getNombre());
-        }
+        }// agrego valor de perro como su llave y el nombre del perro como su valor
+        System.out.println("HASHMAP"); // muestro hashmap
+        
         System.out.println(varios);
-        System.out.println(perros.get(0));
+        
+        System.out.println("KEYSET");
+        
         System.out.println(varios.keySet());
     }
 
