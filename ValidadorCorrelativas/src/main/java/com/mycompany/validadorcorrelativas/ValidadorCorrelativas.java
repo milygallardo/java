@@ -65,15 +65,16 @@ public class ValidadorCorrelativas {
         alumnos.add(alumno3);
 
         boolean condMateI = true;
-        if (alumno1.materiasAprobadas.equals(materia1) || alumno2.materiasAprobadas.equals(materia1) || alumno3.materiasAprobadas.equals(materia1)) {
+        if (alumno1.materiasAprobadas.contains(materia1) || alumno2.materiasAprobadas.contains(materia1) || alumno3.materiasAprobadas.contains(materia1)) {
             materia2.setPuedeCursar(condMateI);
         }
 
         boolean condMateII = true;
-        if (alumno1.materiasAprobadas.equals(materia2) || alumno2.materiasAprobadas.equals(materia2) || alumno3.materiasAprobadas.equals(materia2)) {
+        if (alumno1.materiasAprobadas.contains(materia2) || alumno2.materiasAprobadas.contains(materia2) || alumno3.materiasAprobadas.contains(materia2)) {
             materia3.setPuedeCursar(condMateII);
         }
-
+        
+            
     }
 
     static String inscripcionAprobada() {
