@@ -4,6 +4,7 @@
  */
 package Alumno;
 
+import java.util.ArrayList;
 import java.util.List;
 import materias.Materia;
 
@@ -12,18 +13,18 @@ import materias.Materia;
  * @author Diego
  */
 public class Alumno {
+
     String nombres;
     String legajo;
-   public List<Materia> materiasAprobadas;
+    public List<Materia> materiasAprobadas = new ArrayList<>();
 
     public Alumno() {
     }
 
-    public Alumno(String nombres, String legajo, List<Materia> materiasAprobadas) {
+    public Alumno(String nombres, String legajo) {
         this.nombres = nombres;
         this.legajo = legajo;
-        this.materiasAprobadas = materiasAprobadas;
-    }
+            }
 
     public String getNombres() {
         return nombres;
@@ -53,5 +54,5 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "nombres=" + nombres + ", legajo=" + legajo + ", materiasAprobadas=" + materiasAprobadas + '}';
     }
-    
-    }
+
+}

@@ -5,7 +5,7 @@
 package inscripciones;
 
 import Alumno.Alumno;
-import java.time.LocalDate;
+import java.util.Date;
 import materias.Materia;
 
 /**
@@ -13,19 +13,17 @@ import materias.Materia;
  * @author Diego
  */
 public class Inscripcion {
+
     Alumno alumno;
     Materia materia;
-    LocalDate fecha;
-    boolean aprobada;
+    Date fecha = new Date();
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Alumno alumno, Materia materia, LocalDate fecha, boolean aprobada) {
+    public Inscripcion(Alumno alumno, Materia materia) {
         this.alumno = alumno;
         this.materia = materia;
-        this.fecha = fecha;
-        this.aprobada = aprobada;
     }
 
     public Alumno getAlumno() {
@@ -44,27 +42,22 @@ public class Inscripcion {
         this.materia = materia;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public boolean isAprobada() {
+    public boolean validarInscripcion() {
+        boolean aprobada = true;
+        if (alumno.getMateriasAprobadas().containsAll(materia.getCorrelativas())) {
+            System.out.println("Puede inscribirse");
+        } else {
+            System.out.println("No puede inscribirse");
+            aprobada = false;
+        }
         return aprobada;
     }
-
-    public void setAprobada(boolean aprobada) {
-        this.aprobada = aprobada;
-    }
-
-    @Override
-    public String toString() {
-        return "Inscripcion{" + "alumno=" + alumno + ", materia=" + materia + ", fecha=" + fecha + ", aprobada=" + aprobada + '}';
-    }
-    
-    
-    
 }

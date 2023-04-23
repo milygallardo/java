@@ -4,6 +4,7 @@
  */
 package materias;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,18 +12,16 @@ import java.util.List;
  * @author Diego
  */
 public class Materia {
+
     String nombre;
-    public List<Materia> correlativas;
-    boolean puedeCursar;
+    public List<Materia> correlativas = new ArrayList<>();
 
     public Materia() {
     }
 
-    public Materia(String nombre, List<Materia> correlativas, boolean puedeCursar) {
+    public Materia(String nombre) {
         this.nombre = nombre;
-        this.correlativas = correlativas;
-        this.puedeCursar = puedeCursar;
-    }
+            }
 
     public String getNombre() {
         return nombre;
@@ -40,19 +39,4 @@ public class Materia {
         this.correlativas = correlativas;
     }
 
-    public boolean isPuedeCursar() {
-        return puedeCursar;
-    }
-
-    public void setPuedeCursar(boolean puedeCursar) {
-        this.puedeCursar = puedeCursar;
-    }
-
-    @Override
-    public String toString() {
-        return "Materia{" + "nombre=" + nombre + ", correlativas=" + correlativas + ", puedeCursar=" + puedeCursar + '}';
-    }
-    
-    
-    
 }
