@@ -53,9 +53,9 @@ public class Inscripcion {
     public boolean validarInscripcion() {
         boolean aprobada = true;
         if (alumno.getMateriasAprobadas().containsAll(materia.getCorrelativas())) {
-            System.out.println("Puede inscribirse");
+            System.out.println(alumno + "puede inscribirse");
         } else {
-            System.out.println("No puede inscribirse");
+            System.out.println(alumno + " no poseee las correlativas necesarias para inscribirse");
             aprobada = false;
         }
         return aprobada;

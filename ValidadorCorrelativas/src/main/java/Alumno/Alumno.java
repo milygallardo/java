@@ -5,9 +5,6 @@
 package Alumno;
 
 import java.util.ArrayList;
-import java.util.List;
-import materias.Materia;
-
 /**
  *
  * @author Diego
@@ -16,7 +13,7 @@ public class Alumno {
 
     String nombres;
     String legajo;
-    public List<Materia> materiasAprobadas = new ArrayList<>();
+    public ArrayList<String> materiasAprobadas = new ArrayList<>();
 
     public Alumno() {
     }
@@ -24,7 +21,7 @@ public class Alumno {
     public Alumno(String nombres, String legajo) {
         this.nombres = nombres;
         this.legajo = legajo;
-            }
+    }
 
     public String getNombres() {
         return nombres;
@@ -42,15 +39,15 @@ public class Alumno {
         this.legajo = legajo;
     }
 
-    public List<Materia> getMateriasAprobadas() {
+    public ArrayList<String> getMateriasAprobadas() {
         return materiasAprobadas;
     }
 
-    public void setMateriasAprobadas(List<Materia> materiasAprobadas) {
+    public void setMateriasAprobadas(ArrayList<String> materiasAprobadas) {
         this.materiasAprobadas = materiasAprobadas;
     }
 
-    @Override
+      @Override
     public String toString() {
         return "Alumno{" + "nombres=" + nombres + ", legajo=" + legajo + ", materiasAprobadas=" + materiasAprobadas + '}';
     }

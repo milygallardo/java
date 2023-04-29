@@ -5,7 +5,6 @@
 package materias;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.List;
 public class Materia {
 
     String nombre;
-    public List<Materia> correlativas = new ArrayList<>();
+    public ArrayList<String> correlativas = new ArrayList<>();
 
     public Materia() {
     }
@@ -31,12 +30,13 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public List<Materia> getCorrelativas() {
+    public ArrayList<String> getCorrelativas() {
         return correlativas;
     }
 
-    public void setCorrelativas(List<Materia> correlativas) {
+    public void setCorrelativas(ArrayList<String> correlativas) {
         this.correlativas = correlativas;
     }
+
 
 }
