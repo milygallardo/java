@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import conexion.Conexion;
+import inscripciones.Inscripcion;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,45 +23,47 @@ import materias.Materia;
  *
  * @author Diego
  */
+//https://github.com/milygallardo/java/tree/master/ValidadorCorrelativas
 public class ValidadorCorrelativas {
 
     public static Conexion conexion = new Conexion();
-    public static Scanner sc = new Scanner(System.in).useDelimiter("\n");
+    public static final Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
     public static void main(String[] args) throws JsonProcessingException, SQLException, IOException {
 
-        Materia materia1 = new Materia("Razonamiento");
-        Materia materia2 = new Materia("Resolucion");
-        Materia materia3 = new Materia("Matematica");
-
-        materia2.correlativas.add("Razonamiento");
-        materia3.correlativas.add("Razonamiento");
-        materia3.correlativas.add("Resolucion");
-
-        Alumno alumno1 = new Alumno("Angelo", "00003");
-        Alumno alumno2 = new Alumno("Charlie", "00002");
-        Alumno alumno3 = new Alumno("Karina", "00001");
-
-        ObjectMapper obj = new ObjectMapper();
-        String jsonText = obj.writeValueAsString(alumno1);
-        String jsonText1 = obj.writeValueAsString(alumno2);
-        String jsonText2 = obj.writeValueAsString(alumno3);
-
-        alumno1.materiasAprobadas.add("Razonamiento");
-        alumno2.materiasAprobadas.add("Razonamiento");
-        alumno2.materiasAprobadas.add("Resolucion");
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonText3 = objectMapper.writeValueAsString(materia1);
-        String jsonText4 = objectMapper.writeValueAsString(materia2);
-        String jsonText5 = objectMapper.writeValueAsString(materia3);
+//        Materia materia1 = new Materia("Razonamiento");
+//        Materia materia2 = new Materia("Resolucion");
+//        Materia materia3 = new Materia("Matematica");
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String jsonText3 = objectMapper.writeValueAsString(materia1);
+//        String jsonText4 = objectMapper.writeValueAsString(materia2);
+//        String jsonText5 = objectMapper.writeValueAsString(materia3);
+//
+//        materia2.correlativas.add("Razonamiento");
+//        materia3.correlativas.add("Razonamiento");
+//        materia3.correlativas.add("Resolucion");
+//
+//        Alumno alumno1 = new Alumno("Angelo", "00003");
+//        Alumno alumno2 = new Alumno("Charlie", "00002");
+//        Alumno alumno3 = new Alumno("Karina", "00001");
+//
+//        ObjectMapper obj = new ObjectMapper();
+//        String jsonText = obj.writeValueAsString(alumno1);
+//        String jsonText1 = obj.writeValueAsString(alumno2);
+//        String jsonText2 = obj.writeValueAsString(alumno3);
+//
+//        alumno1.materiasAprobadas.add("Razonamiento");
+//        alumno2.materiasAprobadas.add("Razonamiento");
+//        alumno2.materiasAprobadas.add("Resolucion");
 
         menuCorrelativas();
+        
     }
 
-    public static void agregarAlumno() throws SQLException {
-        Alumno alumno = new Alumno();
+    public static void agregarAlumno() throws SQLException, JsonProcessingException {
         conexion.estableceConexion();
+        Alumno alumno = new Alumno();
 
         System.out.println("Nombre del alumno que quiere inscribirse");
         String nombre = sc.next();
@@ -81,9 +84,7 @@ public class ValidadorCorrelativas {
             materiasAprobadas.add(input);
         }
 
-        String aprobadasJson = new Gson().toJson(materiasAprobadas);
-
-        conexion.estableceConexion();
+        String aprobadasJson = new ObjectMapper().writeValueAsString(materiasAprobadas);
         Statement statement = conexion.conectar.createStatement();
         statement.executeUpdate("INSERT INTO alumnos VALUES (\"" + nombre + "\", " + legajo + ", '" + aprobadasJson + "');");
         conexion.cerrarConnection();
@@ -91,7 +92,6 @@ public class ValidadorCorrelativas {
 
     public static Alumno traerDatosAlumno() throws SQLException, JsonProcessingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-
         mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
         conexion.estableceConexion();
@@ -170,35 +170,40 @@ public class ValidadorCorrelativas {
 
     public static void menuCorrelativas() throws JsonProcessingException, SQLException, IOException {
         int input1;
+
         do {
-           input1 = 0;
             System.out.println("Ingrese el numero correspondiente");
             System.out.println("1 - Agregar un alumno");
             System.out.println("2 - Obtener datos de un alumno");
             System.out.println("3 - Crear una materia");
             System.out.println("4 - Traer datos de una materia");
-            
+            System.out.println("5 - Salir");
             input1 = sc.nextInt();
-
+            
             switch (input1) {
                 case 1:
+                    System.out.println("Usted eligio la opcion 1");
                     agregarAlumno();
                     break;
                 case 2:
+                    System.out.println("Usted eligio la opcion 2");
                     traerDatosAlumno();
                     break;
                 case 3:
+                    System.out.println("Usted eligio la opcion 3");
                     agregarMateria();
                     break;
                 case 4:
+                    System.out.println("Usted eligio la opcion 4");
                     traerDatosMateria();
                     break;
-
+                case 5:
+                    System.out.println("El programa ha terminado");
+                    break;
                 default:
-                    System.out.println("Valor ingresado no coincide");
-                    throw new AssertionError();
+                System.out.println("Valor ingresado no valido");
             }
-        } while (input1 != 55);
-        System.out.println("El programa termino");
+        } while (input1 != 5);
+        sc.close();
     }
 }
