@@ -50,14 +50,11 @@ public class Inscripcion {
         this.fecha = fecha;
     }
 
-    public boolean validarInscripcion() {
-        boolean aprobada = true;
-        if (alumno.getMateriasAprobadas().containsAll(materia.getCorrelativas())) {
-            System.out.println(alumno + "puede inscribirse");
+    public void validarInscripcion(Materia materia, Alumno alumno) {
+        if (materia.getCorrelativas().containsAll(alumno.getMateriasAprobadas())) {
+            System.out.println("Inscripcion aprobada");
         } else {
-            System.out.println(alumno + " no poseee las correlativas necesarias para inscribirse");
-            aprobada = false;
-        }
-        return aprobada;
+            System.out.println("Inscripcion no aceptada");
     }
+}
 }

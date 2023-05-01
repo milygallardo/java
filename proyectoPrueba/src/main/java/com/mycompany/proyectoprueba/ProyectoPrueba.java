@@ -80,7 +80,7 @@ public class ProyectoPrueba {
             System.out.println("1- SI");
             System.out.println("2- NO");
             input = sc.next();
-
+            
             switch (input) {
                 case "1": // mientras yo le ponga 1, agrega perros al arraylist
                     perros.add(crearPrueba());
